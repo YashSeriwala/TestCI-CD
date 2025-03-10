@@ -6,7 +6,8 @@ on:
       
 env:
   docker_image: "666132446347.dkr.ecr.ap-south-1.amazonaws.com/test:latest"
-      
+  aws_region: "ap-south-1"   
+  
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AccessKey }}
         aws-secret-access-key: ${{ secrets.SecretKey }}
-        aws-region: ap-south-1
+        aws-region: ${{env.aws_region}}
 
     # Step 4: Log in to Amazon ECR
     - name: Login to Amazon ECR
