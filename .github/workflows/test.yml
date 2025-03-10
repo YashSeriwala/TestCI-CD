@@ -1,10 +1,12 @@
 name: CI/CD Pipeline to ECR
-
 on:
   push:
     branches:
       - master
-  
+      
+env:
+  docker_image: "666132446347.dkr.ecr.ap-south-1.amazonaws.com/test:latest"
+      
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -34,9 +36,9 @@ jobs:
     # Step 5: Build Docker image
     - name: Build Docker image
       run: |
-        docker build -t 666132446347.dkr.ecr.ap-south-1.amazonaws.com/test:latest .
+        docker build -t ${{env.docker_image}} .
         
     # Step 6: Push Docker image to ECR
     - name: Push Docker image to ECR
       run: |
-        docker push 666132446347.dkr.ecr.ap-south-1.amazonaws.com/test:latest
+        docker push ${{env.docker_image}}
